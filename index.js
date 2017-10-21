@@ -27,7 +27,7 @@ app.post('/signin', jsonParser, (req, res) => {
 app.post('/check', jsonParser, (req, res) => {
     const { token } = req.body;
     User.checkToken(token)
-    .then(newToken => res.send({ token: newToken }))
+    .then(obj => res.send(obj))
     .catch(err => res.send({ error: err.message }));
 });
 
