@@ -29,7 +29,7 @@ User.signIn = async function (email, password) {
     const same = await compare(password, user.password);
     if (!same) throw new Error('Password is incorrect');
     const token = await signPromise({ email, name: user.name });
-    return token;
+    return { token, name: user.name, email, phone: user.phone, message: 'OK' };
 }
 
 User.checkToken = async function (oldToken) {
