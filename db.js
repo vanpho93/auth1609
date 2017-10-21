@@ -28,14 +28,14 @@ User.signIn = async function (email, password) {
     if (!user) throw new Error('Email is not exist.');
     const same = await compare(password, user.password);
     if (!same) throw new Error('Password is incorrect');
-    const token = await signPromise({ email, name: user.name });
+    const token = await signPromise({ email, name: user.name, phone: user.phone });
     return { token, name: user.name, email, phone: user.phone, message: 'OK' };
 }
 
 User.checkToken = async function (oldToken) {
    const obj = await verifyPromise(oldToken);
    const newToken = await signPromise(obj);
-   return newToken;
+   return { token: newToken, name: obj.name, email: obj.email, phone: obj.phone };
 }
 
 module.exports = User;
