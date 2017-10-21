@@ -1,0 +1,13 @@
+{
+  "name": "auth1609",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/vanpho93/auth1609.git",
+  "author": "Van Pho Nguyen <vanpho02@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongoose": "^4.12.1"
+  }
+}
