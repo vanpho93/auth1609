@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { hash, compare } = require('bcrypt');
+const { signPromise } = require('./jwt');
 
 mongoose.Promise = global.Promise;
 
@@ -27,6 +28,8 @@ User.signIn = async function (email, password) {
     if (!user) throw new Error('Email is not exist.');
     const same = await compare(password, user.password);
     if (!same) throw new Error('Password is incorrect');
+    const token = await signPromise({ email, name: user.name });
+    return token;
 }
 
 module.exports = User;

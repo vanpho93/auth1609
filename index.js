@@ -20,7 +20,7 @@ app.post('/signup', jsonParser, (req, res) => {
 app.post('/signin', jsonParser, (req, res) => {
     const { email, password } = req.body;
     User.signIn(email, password)
-    .then(() => res.send({ message: 'OK' }))
+    .then(token => res.send({ message: 'OK', token }))
     .catch(err => res.send({ error: err.message }));
 });
 

@@ -22,8 +22,4 @@ function verifyPromise(token) {
     });
 }
 
-// signPromise({ email: 'abcd', password: 'def' })
-// .then(token => console.log(token));
-
-// verifyPromise('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY2QiLCJwYXNzd29yZCI6ImRlZiIsImlhdCI6MTUwODU2MDk5MywiZXhwIjoxNTA4NTY0NTkzfQ.SB9Z0ZlUc1HSpAFOTijkoXcCvfRqhbE3VO6_BabQMnA')
-// .then(obj => console.log(obj));
+module.exports = { signPromise, verifyPromise };
