@@ -17,4 +17,11 @@ app.post('/signup', jsonParser, (req, res) => {
     .catch(err => res.send({ error: err.message }));
 });
 
+app.post('/signin', jsonParser, (req, res) => {
+    const { email, password } = req.body;
+    User.signIn(email, password)
+    .then(() => res.send({ message: 'OK' }))
+    .catch(err => res.send({ error: err.message }));
+});
+
 app.listen(3000, () => console.log('Server started'));

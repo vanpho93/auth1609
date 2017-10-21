@@ -16,14 +16,17 @@ const User = mongoose.model('user', UserSchema);
 
 mongoose.connect('mongodb://localhost/rn1609', { useMongoClient: true });
 
-function signUp(email, password, name, phone) {
-    return hash(password, 8)
-    .then(encrypted => {
-        const user = new User({ email, password: encrypted, name, phone });
-        return user.save();
-    });
+User.signUp = async function(email, password, name, phone) {
+    const encrypted = await hash(password, 8);
+    const user = new User({ email, password: encrypted, name, phone });
+    return user.save();
 }
 
-User.signUp = signUp;
+User.signIn = async function (email, password) {
+    const user = await User.findOne({ email });
+    if (!user) throw new Error('Email is not exist.');
+    const same = await compare(password, user.password);
+    if (!same) throw new Error('Password is incorrect');
+}
 
 module.exports = User;
