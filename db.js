@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { hash, compare } = require('bcrypt');
-const { signPromise } = require('./jwt');
+const { signPromise, verifyPromise } = require('./jwt');
 
 mongoose.Promise = global.Promise;
 
@@ -32,4 +32,15 @@ User.signIn = async function (email, password) {
     return token;
 }
 
+User.checkToken = async function (oldToken) {
+   const obj = await verifyPromise(oldToken);
+   const newToken = await signPromise(obj);
+   return newToken;
+}
+
 module.exports = User;
+
+// User.signIn('z@gmail.com', '1232456').then(token => console.log(token));
+
+// User.checkToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InpAZ21haWwuY29tIiwibmFtZSI6Ik5hbSIsImlhdCI6MTUwODU2OTE2NywiZXhwIjoxNTA4NTcyNzY3fQ.84Lo4xZa7lhd8G61nS6cbk0iuJwae3qO-f5RlorJj4w')
+// .then(token => console.log(token));

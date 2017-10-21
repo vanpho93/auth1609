@@ -24,4 +24,11 @@ app.post('/signin', jsonParser, (req, res) => {
     .catch(err => res.send({ error: err.message }));
 });
 
+app.post('/check', jsonParser, (req, res) => {
+    const { token } = req.body;
+    User.checkToken(token)
+    .then(newToken => res.send({ token: newToken }))
+    .catch(err => res.send({ error: err.message }));
+});
+
 app.listen(3000, () => console.log('Server started'));
