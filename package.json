@@ -6,6 +6,7 @@
   "author": "Van Pho Nguyen <vanpho02@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "mongoose": "^4.12.1"

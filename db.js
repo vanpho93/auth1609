@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const { hash, compare } = require('bcrypt');
+
 mongoose.Promise = global.Promise;
 
 const Schema = mongoose.Schema;
@@ -14,11 +16,14 @@ const User = mongoose.model('user', UserSchema);
 
 mongoose.connect('mongodb://localhost/rn1609', { useMongoClient: true });
 
+function signUp(email, password, name, phone) {
+    return hash(password, 8)
+    .then(encrypted => {
+        const user = new User({ email, password: encrypted, name, phone });
+        return user.save();
+    });
+}
+
+User.signUp = signUp;
+
 module.exports = User;
-
-// User.insertMany([
-//     { email: 'a@gmail.com', password: '123456', name: 'a b c', phone: '129784871283' },
-//     { email: 'b@gmail.com', password: '234567', name: 'a b c', phone: '129784871283' },
-// ])
-
-// User.find().then(users => console.log(users));
